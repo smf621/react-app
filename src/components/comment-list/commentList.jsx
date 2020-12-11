@@ -1,13 +1,32 @@
 import React, { Component } from 'react';
+import PropTypes  from 'prop-types'
+
+import CommentItem from '../comment-item/commentItem'
+import './commentList.css'
 
 class commentList extends Component {
+
+    static propTypes = {
+        comments: PropTypes.array.isRequired,
+        delComment:PropTypes.func.isRequired
+    }
     render() {
+        const {comments,delComment} = this.props
         return (
-            <div>
-                
+            <div className="col-md-8">
+                <h3 className="reply">评论回复：</h3>
+                <h2 style={{ display: 'none' }}>暂无评论，点击左侧添加评论！！！</h2>
+                <ul className="list-group">
+                    {
+                        comments.map((item,index)=> <CommentItem comments={item} key={index} delComment={delComment} index={index}/>)
+                    }
+                </ul>
             </div>
         );
     }
-}
 
-export default comment-list;
+}
+// commentList.protoTypes = {
+//     comments:ProtoTypes.array.isRequired
+// }
+export default commentList;
